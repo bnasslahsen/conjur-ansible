@@ -4,9 +4,9 @@
   connection: local
   become: yes
   vars:
-    nginx_private_key: "{{ lookup('cyberark.conjur.conjur_variable', 'cd/ansible/secrets/nginx_private_key') }}"
+    nginx_private_key: "{{ lookup('cyberark.conjur.conjur_variable', 'cd/ansible/secrets/test-password') }}"
   tasks:
     - name: Lookup variable in Conjur
       debug:
-        msg: "{{ nginx_private_key }}"
+        msg: "{{ test-password }}"
 
