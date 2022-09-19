@@ -1,0 +1,22 @@
+---
+- name: This is a Conjur Ansible integration demo
+  hosts: localhost
+  connection: local
+  become: yes
+  roles:
+    - role: cyberark.conjur.conjur_host_identity
+      conjur_account: devsecops
+      conjur_appliance_url: "https://conjur.demo.cybr"
+      conjur_host_factory_token: "{{lookup('env', 'FACTORY_TOKEN')}}"
+      conjur_host_name: "{{inventory_hostname}}"
+      conjur_ssl_certificate: "{{lookup('file', '/home/ec2-user/conjur-ansible/conjur-public-key.pem')}}"
+      conjur_validate_certs: false
+
+  vars:
+    nginx_private_key: "{{ lookup('cyberark.conjur.conjur_variable', 'cd/ansible/secrets/nginx_private_key', validate_certs=false) }}"
+
+  tasks:
+    - name: Lookup variable in Conjur
+      debug:
+        msg: "{{ nginx_private_key }}"
+
