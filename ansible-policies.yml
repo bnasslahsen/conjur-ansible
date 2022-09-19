@@ -25,5 +25,5 @@
   member: !host cd/ansible/controller
 
 ### conjur variable get -i cd/ansible/secrets/test-password
-### conjur variable get -i “vault-test/authn/Safe01/Operating System-UnixSSH-127.0.0.1-root/password”
+### conjur variable get -i "vault-test/authn/Safe01/Operating System-UnixSSH-127.0.0.1-root/password"
 ### conjur policy replace -b root -f delete-root.yml
