@@ -6,17 +6,14 @@ set +a
 
 ansible-galaxy collection install cyberark.conjur
 
+openssl s_client -connect "$CONJUR_MASTER_HOSTNAME":"$CONJUR_MASTER_PORT" \
+  -showcerts </dev/null 2> /dev/null | \
+  awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/ {print $0}' \
+  > "$CONJUR_SSL_CERTIFICATE"
+
 conjur policy update -b root -f ansible-host.yml
 conjur policy update -b root -f ansible-secrets.yml
 
 conjur variable set -i cd/ansible/secrets/nginx_private_key -v "toto"
 
-conjur logout > /dev/null 2>&1
-conjur login -i admin -p "$CONJUR_ADM_PWD" > /dev/null 2>&1
-cp $HOME/.netrc "$SCRIPT_DIR/demobook/.netrc"
-sed -i "1 s|$|/authn|" "$SCRIPT_DIR/demobook/.netrc"
-envsubst < "$SCRIPT_DIR/demobook/playbook.yml" > "$SCRIPT_DIR/demobook/playbook.tmp.yml"
-CONJUR_IDENTITY_FILE="$SCRIPT_DIR/demobook/.netrc" ansible-playbook -i inventory playbook.tmp.yml
-rm -f "$SCRIPT_DIR/demobook/.netrc" "$SCRIPT_DIR/demobook/playbook.tmp.yml"
-conjur logout > /dev/null 2>&1
-cd - > /dev/null
+ansible-playbook -i inventory playbook.yml
