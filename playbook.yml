@@ -4,9 +4,9 @@
   connection: local
   become: yes
   vars:
-    test-password: "{{ lookup('cyberark.conjur.conjur_variable', 'cd/ansible/secrets/test-password') }}"
+    test_password: "{{ lookup('cyberark.conjur.conjur_variable', 'cd/ansible/secrets/test-password') }}"
   tasks:
     - name: Lookup variable in Conjur
       debug:
-        msg: "{{ test-password }}"
+        msg: "{{test_password }}"
 
