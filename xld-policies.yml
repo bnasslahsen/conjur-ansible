@@ -14,12 +14,6 @@
     - !grant
       role: !group consumers
       member: !host controller
-    - &variables
-      - !variable secrets/test-password
-    - !permit
-      role: !group /cd/xld/consumers
-      privilege: [ read, execute ]
-      resource: *variables
 - !grant
   role: !group vault-test/authn/Safe01/delegation/consumers
   member: !host cd/xld/controller
