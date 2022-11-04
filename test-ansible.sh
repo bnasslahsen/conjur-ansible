@@ -13,6 +13,6 @@ export CONJUR_ACCOUNT=devsecops
 openssl s_client -connect "$CONJUR_MASTER_HOSTNAME":"$CONJUR_MASTER_PORT" \
   -showcerts </dev/null 2> /dev/null | \
   awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/ {print $0}' \
-  > "/tmp/$CONJUR_CERT_FILE"
+  > "$CONJUR_CERT_FILE"
 
 ansible-playbook -i inventory playbook.yml
