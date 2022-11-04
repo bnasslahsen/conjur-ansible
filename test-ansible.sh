@@ -1,7 +1,9 @@
 #!/bin/bash
 
-export CONJUR_APPLIANCE_URL=https://conjur.demo.cybr:443
-export CONJUR_AUTHN_API_KEY=2hvd0mayxp3r19xtkbj322n1en14h9ttg3kward3bw87wb3epdh2r
+CONJUR_MASTER_HOSTNAME=conjur.demo.cybr
+CONJUR_MASTER_PORT=3000
+export CONJUR_APPLIANCE_URL=https://$CONJUR_MASTER_HOSTNAME:$CONJUR_MASTER_PORT
+export CONJUR_AUTHN_API_KEY=$ANSIBLE_KEY
 export CONJUR_AUTHN_LOGIN=host/cd/ansible/controller
 export CONJUR_CERT_FILE=conjur.pem
 export CONJUR_ACCOUNT=devsecops
