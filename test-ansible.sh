@@ -1,8 +1,10 @@
 #!/bin/bash
 
-set -a
-source ".env"
-set +a
+CONJUR_APPLIANCE_URL=https://conjur.demo.cybr:443
+CONJUR_AUTHN_API_KEY=2hvd0mayxp3r19xtkbj322n1en14h9ttg3kward3bw87wb3epdh2r
+CONJUR_AUTHN_LOGIN=host/cd/ansible/controller
+CONJUR_CERT_FILE=conjur.pem
+CONJUR_ACCOUNT=devsecops
 
 ansible-galaxy collection install cyberark.conjur
 
