@@ -20,9 +20,6 @@
       role: !group /cd/ansible/consumers
       privilege: [ read, execute ]
       resource: *variables
-- !grant
-  role: !group vault-test/authn/Safe01/delegation/consumers
-  member: !host cd/ansible/controller
 
 ### conjur variable get -i cd/ansible/secrets/test-password
 ### conjur variable get -i "vault-test/authn/Safe01/Operating System-UnixSSH-127.0.0.1-root/password"

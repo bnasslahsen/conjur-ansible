@@ -4,15 +4,14 @@ set -a
 source ".env"
 set +a
 
-ansible-galaxy collection install cyberark.conjur
+#ansible-galaxy collection install cyberark.conjur
 
 openssl s_client -connect "$CONJUR_MASTER_HOSTNAME":"$CONJUR_MASTER_PORT" \
   -showcerts </dev/null 2> /dev/null | \
   awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/ {print $0}' \
   > "$CONJUR_CERT_FILE"
 
-#conjur policy update -b root -f ansible-host.yml
-#conjur policy update -b root -f ansible-secrets.yml
-#conjur variable set -i cd/ansible/secrets/test_password -v "toto"
+conjur policy update -b root -f ansible-policies.yml
+conjur variable set -i cd/ansible/secrets/test-password -v "toto"
 
-ansible-playbook -i inventory playbook.yml
+#ansible-playbook -i inventory playbook.yml
