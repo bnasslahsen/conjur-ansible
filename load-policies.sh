@@ -11,3 +11,4 @@ openssl s_client -connect "$CONJUR_MASTER_HOSTNAME":"$CONJUR_MASTER_PORT" \
 
 conjur policy update -b root -f ansible-policies.yml
 conjur variable set -i cd/ansible/secrets/test-password -v "toto"
+conjur variable set -i cd/ansible/secrets/ansible-key -v "toto"
