@@ -9,7 +9,7 @@
     - !host
       id: controller
       annotations:
-        description: Global host identity for Ansible Tower
+        description: Global host identity for Ansible
     - !group consumers
     - !grant
       role: !group consumers
